@@ -1,26 +1,27 @@
-import { config as baseConfig } from '@wdio/sync';
 
-export const config = {
+exports.config = {
     runner: 'local',
-    path: '/wd/hub',
-    specs: ['./test/specs/**/*.js'],
+    specs: [
+        './tests/**/*.e2e.js'
+    ],
     maxInstances: 1,
     capabilities: [{
         platformName: 'Android',
-        'appium:platformVersion': '11.0',
-        'appium:deviceName': 'Android Emulator',
-        'appium:automationName': 'UiAutomator2',
-        'appium:browserName': 'Chrome'
+        browserName: 'Chrome',
+        automationName: 'UiAutomator2',
+        deviceName: 'Android Emulator',
     }],
     logLevel: 'info',
+    bail: 0,
+    baseUrl: 'https://lojaebac.ebaconline.art.br/',
+    waitforTimeout: 10000,
+    connectionRetryTimeout: 90000,
+    connectionRetryCount: 3,
+    services: ['appium'],
     framework: 'mocha',
     reporters: ['spec'],
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
-    },
-    services: ['appium'],
-    appium: {
-        command: 'appium'
     }
 };
